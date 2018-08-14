@@ -5,5 +5,5 @@ This Repo is created in order to store some important notes / info / materials f
 
 Includes till now:
 1) some Git stuff
-2) Flask methods counter DoJo
+2) Flask methods counter DoJo (stores data in data.txt file, before in global variables)
 
