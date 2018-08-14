@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>FlaskDoJo</title>
+</head>
+<body>
+    <h2>Welcome to the Flask DoJo exercise</h2>
+    <br>
+    <div>
+        <form action={{ url_for('request_counter')}} method='GET' >
+            <button type='submit'>send GET request</button><strong> GET COUNTER : {{ counter['GET'] }}</strong></strong>
+        </form>
+        
+        <br>
+        
+        <form action={{ url_for('request_counter')}} method='POST'>
+            <button type='submit'>send POST request</button><strong> POST COUNTER : {{ counter['POST'] }}</strong>
+        </form>
+        
+        <br>
+        
+        <form action={{ url_for('request_counter')}} method='DELETE' >
+                <button type='submit'>send DELETE request</button><strong> GET COUNTER : {{ counter['DELETE'] }}</strong></strong>
+            </form>
+        <br>
+        
+        <form action={{ url_for('request_counter')}} method='PUT' >
+                <button type='submit'>send PUT request</button><strong> GET COUNTER : {{ counter['PUT'] }}</strong></strong>
+            </form>
+        <br>
+        
+        
+        
+        
+        <a href="/statics" title = "check out the get and post stats"><h3><strong>STATISTICS</strong></h3></a>
+        <br>
+
+        
+        
+    </div>
+  
+</body>
+</html>

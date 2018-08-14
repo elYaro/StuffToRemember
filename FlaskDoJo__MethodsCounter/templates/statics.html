@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Document</title>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <th>Method</th>
+            <th>Counter</th>
+        </tr>
+        {% for key in counter %}
+        <tr>
+            <td>{{ key}}</td>
+            <td>{{ counter[key] }}</td>
+        </tr>
+        <br>
+        {% endfor %}
+        
+    </table>  
+    <br>
+    <button><a href="/">  BACK  </a></button>
+</body>
+</html>
