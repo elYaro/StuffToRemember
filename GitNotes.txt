@@ -129,7 +129,7 @@ git add -A
 git status 
 git commit -m "wrong comment here which we will correct"
 git log                                 we see the wrong comment
-git commit --ammend -m "correct comment here"       
+git commit --amend -m "correct comment here"       
 git log                                 the hash of the commit will change and the comment will change aswell we see
 
 
