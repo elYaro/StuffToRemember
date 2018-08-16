@@ -1,3 +1,14 @@
+#### GIT CONFIGURATION ####
+git --version                                           checking the version
+git config --global user.name "user name here"          setting user
+git config --global user.email "email address here"     setting email
+git config user.name                                    checking user
+git config user.email                                   checking email
+git config --list                                       checking settings
+
+
+
+
 #### STARTING WITH GIT REPO ####
  /--------------------------------------------------------------------------------\
 | SCENARIO ONE:                                                                   | 
@@ -43,15 +54,18 @@
     git commit -m "here write the description to the commit"
 
 8) create remote repo and connect it to the actual local repo
-git remote add origin <remote github account url>
-git remote -v                    comment: checking the repos 
+    git remote add origin <remote github account url>
+    git remote -v               comment: checking the repos 
+
+
+
 
 
 /--------------------------------------------------------------------------------\
 | SCENARIO TWO:                                                                   | 
 |    - there is a project on remote GitHub  repository                            |
 |    - there is an active account on GitHub                                       |
- \--------------------------------------------------------------------------------/
+\--------------------------------------------------------------------------------/
 1) go to GitHub remote repository and copy it's url
 
 2) in terminal write
@@ -73,7 +87,7 @@ git status
 git add -A or git add .
 git commit -m "<comment here>" 
 
-git pull origin developer           comment: dont touch master
+git pull origin developer           comment: dont touch master, just in case of any changes by others
 git push origin developer           comment: dont touch master
 
 
@@ -86,14 +100,14 @@ git push origin developer           comment: dont touch master
 git branch <new branch>
 git checkout <new branch>
 or just......
-git checkout -b <new branch>
+git checkout -b <new branch>    optional        git checkout -b <new_feature_branch_name_here> master .....creates new branch based on master
 
 2) commit changes and push them to remote <new branch>
 git branch
 git status
 git add -A
 git commit -m "new function"
-git push -u origin <destination new branch>
+git push -u origin < new feature branch>    This command pushes new-feature to the remote repository (origin), and the -u flag adds it as a remote tracking branch. After setting up the tracking branch, git push can be invoked without any parameters to automatically push the new-feature branch to the central repository.
 git branch -a
 
 3) merge a branch
@@ -101,13 +115,13 @@ git checkout developer
 git pull origin developer                to have any changes sent by others
 git branch --merged                      branches merged so far 
 git merge <new branch>                   merging localy
-git push origin developer               pushing to remote
+git push origin developer                pushing to remote
 
 4) deleting a branch
 git branch --merged                     to double check if all was merged 
 git branch -d <new branch>              will delete branch locally
 git branch -a                           check branches
-git push origin --delete <new branch>   will delete the brnch from remote 
+git push origin --delete <new branch>   will delete the branch from remote 
 git branch -a                           checking the recult of our action
 
 
@@ -115,14 +129,14 @@ git branch -a                           checking the recult of our action
 /-----------------------------------------------\
 |#### FIXING COMMON MISTAKES ####               |
 \-----------------------------------------------/
-COMING BACK TO THE SITUATION FROM THE LAST COMMIT
+#### COMING BACK TO THE SITUATION FROM THE LAST COMMIT
 making changes to the file <file>
 git diff
-git checkout                            comes back to the last commit, earease changes
+git checkout <hash commit number>                       comes back to the last commit, earease changes
 git status
 
 
-CORRECTING CHANGES LOCALLY BEFORE THEIR WERE PUSHED TO REMOTE - EXAMPLE: WRONG COMMENT IN COMMIT
+#### CORRECTING CHANGES LOCALLY BEFORE THEIR WERE PUSHED TO REMOTE - EXAMPLE: WRONG COMMENT IN COMMIT
 making changes to the file <file>
 git status
 git add -A
@@ -133,15 +147,14 @@ git commit --amend -m "correct comment here"
 git log                                 the hash of the commit will change and the comment will change aswell we see
 
 
-
-CORRECTING CHANGES LOCALLY BEFORE THEIR WERE PUSHED TO REMOTE - EXAMPLE: MISSING FILE IN COMMIT AND ADDING THIS FILE TO THE LAST COMMIT
+#### CORRECTING CHANGES LOCALLY BEFORE THEIR WERE PUSHED TO REMOTE - EXAMPLE: MISSING FILE IN COMMIT AND ADDING THIS FILE TO THE LAST COMMIT
 forgeting to add a file to commit...ups....lets fix it....we want to add the file to the last commit 
 git add <missing file>
-git commit --ammend                     comment: will bring interactive editor. in it do: " esc:wq "
+git commit --amend                     comment: will bring interactive editor. in it do: " esc:wq "
 git log --stat
 
 
-CORRECTING CHANGES LOCALLY BEFORE THEIR WERE PUSHED TO REMOTE - EXAMPLE: WE WERE MAKING COMMITS TO THE WRONG BRANCH (like: MASTER) . 
+#### CORRECTING CHANGES LOCALLY BEFORE THEIR WERE PUSHED TO REMOTE - EXAMPLE: WE WERE MAKING COMMITS TO THE WRONG BRANCH (like: MASTER) . 
 HOW DO WE MOVE COMMITS FROM MASTER TO FEATURE BRANCH?   GIT CHERRY PICK :)
 first go to the wrong branch (like: master , or developer)
 git log                              we want to grab a hash number of the commit 6-7 first numbers should be enought
@@ -154,14 +167,14 @@ it will bring the commit from master / developer into new feature branch. but it
 git checkout master 
 git log 
 copy the hash number of the commit we wont to go back to...and then...
-git reset --soft <hush number> 
+git reset --soft <hush number>      comment: soft will set us back to the commit we specified but it will keep files in commit area
 git log
 git status
-                                    comment: soft will set us back to the commit we specified but wi will keep files in commit area
+                                    
 
 or
-git reset <hush number>              this is mixed reset which is default so we do not need to write "mixed"
-changes will be is stage area
+git reset <hush number>             this is "mixed" reset which is default so we do not need to write "mixed"
+                                    changes will be is stage area
 
 or
 git reset --hard <hush number>
@@ -169,7 +182,7 @@ deletes all changes to the files, where will be no files in stage nor commit are
 git clean -df    gets rid of any untracked directories (d)  and files (f)
 
 
-CORRECTING GIT RESET --HARD
+#### CORRECTING GIT RESET --HARD
 if you used git reset --hard you still can go back to some changes deleted !!! cool no? :)
 git reflog                          comment: shows commits and infos
 git checkout <hash number which I want from reflog>
@@ -183,7 +196,7 @@ git log                             comment: we have changes which we though we 
 
 
 
-CORRECTING CHANGES AFTER THEIR WERE PUSHED TO REMOTE
+#### CORRECTING CHANGES AFTER THEIR WERE PUSHED TO REMOTE
 if need to undo some commits but other people already use it....lets use: git revert
 it will create new commits on the top of previous
 beeing on the backup branch
@@ -195,7 +208,7 @@ git log
 
 
 
-GIT STASH COMMAND - USEFULL COMMAND. STASHES CHANGES AND ALLOWS US TO DO SOME STUFF
+#### GIT STASH COMMAND - USEFULL COMMAND. STASHES CHANGES AND ALLOWS US TO DO SOME STUFF
 git checkout -b <feature branch>
 changing some files 
 git diff 
@@ -207,13 +220,12 @@ git stash list
 git stash pop                             will grab first stash, apply and drop it
 git diff
 
-
 git stash save "calc functions"
 git stash list 
 edit the file 
 git diff 
 git stash save "Added square function" 
-git stash list 
+git stash list
 git stash pop 
 
 git stash drop stash@{<number>}
@@ -223,17 +235,50 @@ git stash drop clear                     deletes all stashes
 diff merge apply
 
 
-USEFULL FEATURES:
 
-git log                 shows all commits and infos
-git clean -df           gets rid of any untracked directories (d)  and files (f)
 
+/-----------------------------------\
+|#### USEFULL FEATURES: ####        |
+\-----------------------------------/
+
+#### LOGS
+git log 
+git log --oneline                 shows all commits and infos
+
+
+#### OTHERS :)
+git clean -df                     gets rid of any untracked directories (d)  and files (f)
+git remote -v                       checking the connected repos, allies/
+
+
+
+
+
+#### BRANCHES LOCALLY
+git branch -d <branch>  works only if branch was already merged
+git branch -D <branch>  force delete the specified branch, even if it has unmerged changes
+git branch -m <branch>  Rename the current branch to <branch>
+git branch -a           lists all branches
+
+#### BRANCHES REMOTELY
+1) first we need to connect tot the remote branch
+git remote add new-remote-repo https://bitbucket.com/user/repo.git          Add remote repo to local repo config
+git push <new-remote-repo> crazy-experiment~                                pushes the crazy-experiment branch to new-remote-repo
+
+2) How to delete remote branch 
+git push origin --delete <branch name>
+or
+git push origin :<branch name>
+
+
+#### NAVIGATION IN TERMINAL
 clear                   to clear terminal window
 cd 
 cd .
 cd ..
 ls
 ls -la 
+
 
 git remote add origin <github address>
 git remote -v
@@ -242,11 +287,23 @@ git reset                                     to unstage all
 git add -A <dir name>                         stage all changes in specified dir
 git reset
 
-
 git add -u    (shortage of --update)          all deleted and modified , but non of untracked files
 git add -u <dir name>
 git reset
 
-
 git add .                                    (current dir) it is differetn then default git -A but same as git add -A . 
 
+
+
+GIT REBASE
+The second way (next to merge) of combining work between branches is rebasing. Rebasing essentially takes a set of commits, "copies" them, and plops them down somewhere else.
+While this sounds confusing, the advantage of rebasing is that it can be used to make a nice linear sequence of commits. The commit log / history of the repository will be a lot cleaner if only rebasing is allowed.
+git rebase <where U want to rebase into>    ex: beeing on the <newfeature> branch we can rebase into developer in this way: git rebase developer
+
+
+WORKING WITH REMOTE GIT
+git fetch ....downloads the commits that the remote has but are missing in our local repository, and...
+updates where our remote branches point (for instance, origin/master).it does not actually change any of your local files.
+
+git pull --rebase; we do copy of commits on remove into our local. merge them localy and then push
+git push
