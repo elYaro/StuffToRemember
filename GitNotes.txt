@@ -37,7 +37,7 @@ git config --list                                       checking settings
 6) to remove files from stage area
     a) git rm --cached <file>
     or
-    b) git reset <file>
+    b) git reset <file>         
     or
     c) git reset                comment: this will remove all files from staging area 
 
@@ -129,10 +129,10 @@ git branch -a                           checking the recult of our action
 /-----------------------------------------------\
 |#### FIXING COMMON MISTAKES ####               |
 \-----------------------------------------------/
-#### COMING BACK TO THE SITUATION FROM THE LAST COMMIT
+#### COMING BACK TO THE SITUATION FROM THE LAST COMMIT, UNDOING FILE CHANGES
 making changes to the file <file>
 git diff
-git checkout <hash commit number>                       comes back to the last commit, earease changes
+git checkout --<filename here> IT WORKS ONLY IF CHANGES WERE NOT ADDED NOR COMMITED.... or <hash commit number>                       comes back to the last commit, earease changes
 git status
 
 
@@ -152,6 +152,11 @@ forgeting to add a file to commit...ups....lets fix it....we want to add the fil
 git add <missing file>
 git commit --amend                     comment: will bring interactive editor. in it do: " esc:wq "
 git log --stat
+
+#### CORRECTING CHANGES LOCALLY AFTER THEY HAVE BEEN ADDED AND COMMITED 
+git log
+git show <hash number of commit>
+git revert <hush number>    it will commit changes after we edit the description 
 
 
 #### CORRECTING CHANGES LOCALLY BEFORE THEIR WERE PUSHED TO REMOTE - EXAMPLE: WE WERE MAKING COMMITS TO THE WRONG BRANCH (like: MASTER) . 
@@ -180,6 +185,32 @@ or
 git reset --hard <hush number>
 deletes all changes to the files, where will be no files in stage nor commit area
 git clean -df    gets rid of any untracked directories (d)  and files (f)
+
+#### RESET ADDITIONAL / SUMMARY.
+Note that you must never use git reset to abandon commits that have already been pushed and merged into the origin. 
+git reset will move HEAD and the current branch back to wherever you specify, abandoning any commits that may be left behind.
+This is useful to undo a commit that you no longer need.
+The ref "HEAD^" is usually used together with this command. 
+"HEAD^" means "the commit right before HEAD. 
+"HEAD^^" means "two commits before HEAD", and so on.
+
+#### REVERT ADDITIONAL / SUMMARY. (after commiting and shearing)
+To undo commits that have already been pushed and shared with the team, we cannot use the git reset command. 
+Instead, we have to use git revert.
+git revert will create a new commit that will undo all of the work that was done in the commit you want to revert.
+
+
+#### REBASE ADDITIONAL / SUMMARY. git rebase <where to>
+rebase will take the commits on this branch and "move" them so that their new "base" is at the point you specify.
+You should pay close attention to the commit IDs of the circles as they move when you do this exercise.
+The reason I put "move" in quotations because this process actually generates brand new commits with completely different IDs than the old commits, and leaves the old commits where they were. 
+For this reason, you never want to rebase commits that have already been shared with the team you are working with.
+Creates one branch out of two branches.
+
+#### TAG ADDITIONAL / SUMMARY
+git tag name will create a new tag named "name". Creating tags just creates a new tag pointing to the currently checked out commit.
+Tags can be deleted using the command git tag -d name (coming soon).
+
 
 
 #### CORRECTING GIT RESET --HARD
@@ -242,8 +273,10 @@ diff merge apply
 \-----------------------------------/
 
 #### LOGS
-git log 
+git log
+git log -1                        shows only one commit 
 git log --oneline                 shows all commits and infos
+git show <hash of the commit>     shows all code in the specifiv commit
 
 
 #### OTHERS :)
@@ -273,6 +306,7 @@ git push origin :<branch name>
 
 #### NAVIGATION IN TERMINAL
 clear                   to clear terminal window
+cat <file name>         read this txt file in terminal (look at the content)
 cd 
 cd .
 cd ..
@@ -307,3 +341,8 @@ updates where our remote branches point (for instance, origin/master).it does no
 
 git pull --rebase; we do copy of commits on remove into our local. merge them localy and then push
 git push
+
+
+
+
+HEAD points to last recent commit
