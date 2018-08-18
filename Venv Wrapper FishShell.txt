@@ -1,0 +1,42 @@
+virtualenv --version            checking if virtualenv is installed
+                                COMMENT: if not installed: pip install virtualenv or sudo pip install virtualenv (may be pip3 instrad of pip)
+
+
+pip3 install viertualenvwrapper
+
+vim ~/.bash_profile
+    "." (dot) is for hissen file
+    "~/" is the current user's home directory
+    commends used in vim there: i for insert, shift + z + z , :q, :wq, :q!
+    add there a line: source virtualenvwrapper 
+
+
+at the date 18.Sept 2018 I have:
+which python:           /usr/bin/python                 Python 2.7.10               
+which python2.7:        /usr/bin/python2.7              Python 2.7.10
+which python3:          /usr/local/bin/python3          Python 3.6.2
+which python3.6:        /usr/local/bin/python3.6        Python 3.6.2
+
+which pip:              /usr/local/bin/pip              pip 18.0 from /usr/local/lib/python3.7/site-packages/pip (python 3.7)
+which pip3:             /usr/local/bin/pip3             pip 18.0 from /usr/local/lib/python3.7/site-packages/pip (python 3.7)
+
+which brew:             /usr/local/bin/brew             Homebrew 1.7.1
+which virtualenv:       /usr/local/bin/virtualenv       16.0.0
+which virtualenvwrapper n/a                             virtualenvwrapper 4.8.2
+
+which fish              /usr/local/bin/fish             fish, version 2.7.1
+which bash              /bin/bash                       GNU bash, version 3.2.57(1)-release (x86_64-apple-darwin17)
+
+QUESTION: what is the following path describing? it is written in .bash_profile.org
+how about brew doctor???
+how about brew link on python????
+
+
+
+To start Fish Shell in VSCode simply type: fish
+This is possible after setting the Fish as a default shell by typing: chsh -s /usr/bin/fish
+Comming back to bash as an default shel: chsh -s /bin/bash
+
+ONOTHER USEFULL COMMANDS:
+find . -name virtualenvwrapper.sh
+source ~/.bash_profile              after editing .bash_profile we reload the file to be sure if effects since beeing reloaded
