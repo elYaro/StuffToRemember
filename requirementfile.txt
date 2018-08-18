@@ -1,0 +1,15 @@
+CREATING THE REQUIREMENTS.TXT file
+--------------------------------------------
+
+1) cd <project dir>
+2) activate VIRTUALENV created and dedicated for this project (to check if it works write wrapper command: workon)
+3) touch requirements.file          creates a file
+4) pip list                         will show which I have installed in this virtual env 
+5) pip freeze                       will show all but in the requirement file format
+6) pip freeze > requirements.txt    Please note: a) pip freeze will dump current versions of all the installed modules on that system irrespective of there usage in the current project. b) pip will only list modules that have been installed via pip
+
+
+pip install -r requirements.txt     will save all your python libraries with current version into requirements.txt file
+
+TIPS BECAUSE OF WORKING WITH GIT:
+1) remember to add the virtualenv for projest into .gitignore file. Just ann name of the environment like a file name

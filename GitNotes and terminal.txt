@@ -1,0 +1,392 @@
+#### GIT START CONFIGURATION ####
+--------------------------------------------------------------------------------
+git --version                                           checking the version
+git config --global user.name "user name here"          setting user
+git config --global user.email "email address here"     setting email
+git config user.name                                    checking user
+git config user.email                                   checking email
+git config --list                                       checking all settings
+
+
+
+
+
+#### STARTING WITH GIT REPO ####
+ --------------------------------------------------------------------------------
+ SCENARIO ONE:                                                                    
+    - there is a project on local drive (in dir: myProject)                      
+    - there is an active account on GitHub                                        
+    - REMEMBER ABOUT BRANCHING DURING WORK. HERE NOT INCLUDED BRANCHING WORKFLOW                                
+--------------------------------------------------------------------------------
+1) go to the myProject dir
+    cd myProject
+
+2) start tracking the folder by git
+    git init                    comment: the hidden folder ".git" will be created in this dir
+                                comment: to stop tracking the folder by git just delete ".git" dir by writing: rm -rf .git
+
+3) do changes to any files in myProject dir
+
+4) to check the situation, changes etc. 
+    git status
+
+5) to add files to the stage area there are few options
+    a) git add .                comment: will add all changes or git add -A 
+    b) git add <file>           comment: will add only specific file
+    c) git add *.py             comment: will add all files with extension ".py"
+
+6) to remove files from stage area
+    a) git rm --cached <file>
+    or
+    b) git reset <file>         comment: described below in RESET SECTION
+    or
+    c) git reset                comment: this will remove all files from staging area 
+
+                                comment: if you want permanently ignore some files or directiories do as follows
+                                    *) create a .gitignore file in dir "myProject"
+                                            touch .gitignore
+                                    *) type in, line by line, the files or directiories you want to be ignored
+                                            examples:   log.txt
+                                                        *.txt
+                                                        /statics
+                                                        .DS_Store
+
+7) when needed fileas are in stage area do the commit
+    git commit -m "here write the description to the commit"
+
+8) create remote repo and connect it to the actual local repo
+    git remote add origin <remote github account url>
+    git remote -v               comment: checking the repos connected
+
+9) to push changes to remote
+    git push <destination>  example: git push origin developer
+
+
+
+
+
+ --------------------------------------------------------------------------------
+ SCENARIO TWO:                                                                    
+    - there is a project on remote GitHub  repository                            
+    - there is an active account on GitHub                                       
+ --------------------------------------------------------------------------------
+1) go to GitHub remote repository and copy it's url
+
+2) in terminal write
+    git clone <ulr to remote repo> .    comment: "." (dot) means into the actual/current local dir
+    or
+    git clone <url> <where to clone> it means you can write: git clone <url> .   comment : the dot means into current dir 
+
+3) checking the binding local vs remote
+    git remote -v
+    git branch -a
+
+4) do changes to any files in myProject dir
+
+5) to check the situation, changes etc. 
+    git status
+
+6) to add files to the stage area there are few options
+    a) git add .                comment: will add all changes or git add -A 
+    b) git add <file>           comment: will add only specific file
+    c) git add *.py             comment: will add all files with extension ".py"
+
+7) to remove files from stage area
+    a) git rm --cached <file>
+    or
+    b) git reset <file>         comment: described below in RESET SECTION
+    or
+    c) git reset                comment: this will remove all files from staging area 
+
+                                comment: if you want permanently ignore some files or directiories do as follows
+                                    *) create a .gitignore file in dir "myProject"
+                                            touch .gitignore
+                                    *) type in, line by line, the files or directiories you want to be ignored
+                                            examples:   log.txt
+                                                        *.txt
+                                                        /statics
+                                                        .DS_Store
+
+8) when needed fileas are in stage area do the commit
+    git commit -m "here write the description to the commit"
+
+9) to push changes
+    git push <destination>  example: git push origin developer
+
+
+
+
+
+|#### PUSHING CHANGES ####               
+ --------------------------------------------------------------------------------
+git diff                             comment : show me the changes made to the code
+git status
+git add -A or git add .
+git commit -m "<comment here>" 
+git pull origin developer           comment: dont touch master, just in case of any changes by others
+git push origin developer           comment: dont touch master
+
+
+
+
+ 
+#### COMMON FORKFLOW ####               
+--------------------------------------------------------------------------------
+1) create <new feature branch> to work on the new feature 
+git branch <new branch>
+git checkout <new branch>
+or just...
+git checkout -b <new branch>    optional        git checkout -b <new branch> master      comment: creates new branch based on master
+
+2) commit changes and push them to remote <new branch>
+git status
+git add -A
+git commit -m "new function"
+git push -u origin <new feature branch>     This command pushes new-feature to the remote repository (origin), and the -u flag adds it as a remote tracking branch. 
+                                            After setting up the tracking branch, git push can be invoked without any parameters to automatically push the new-feature branch to the central repository.
+git branch -a
+
+3) merging new featur branch with developer branch
+git checkout developer 
+git pull origin developer                to have all new changes sent by others
+git branch --merged                      branches merged so far 
+git merge <new feature branch>           merging localy
+git push origin developer                pushing to remote
+
+4) deleting a branch
+git branch --merged                     to double check if all was merged 
+git branch -d <new branch>              will delete branch locally
+git branch -a                           check branches
+git push origin --delete <new branch>   will delete the branch from remote 
+git branch -a                           checking the recult of our action
+
+
+
+
+#### FIXING COMMON MISTAKES ####
+--------------------------------------------------------------------------------
+#### CORRECTING CHANGES LOCALLY BEFORE THEIR WERE PUSHED TO REMOTE - EXAMPLE: COMMING BACK TO PREVIOUS COMMIT, UNDOING FILE CHANGES
+--------------------------------------------------------------------------------
+making changes to the file <file>
+git diff
+git checkout --<filename here> IT WORKS ONLY IF CHANGES WERE NOT ADDED NOR COMMITED.... or <hash commit number> but it will only allow to look at the file and edit it                       comes back to the last commit, earease changes
+git status
+
+
+--------------------------------------------------------------------------------
+#### CORRECTING CHANGES LOCALLY BEFORE THEIR WERE PUSHED TO REMOTE - EXAMPLE: WRONG COMMENT IN COMMIT ####
+--------------------------------------------------------------------------------
+making changes to the file <file>
+git status
+git add -A
+git status 
+git commit -m "wrong comment here which we will correct"
+git log                                 we see the wrong comment
+git commit --amend -m "correct comment here"       
+git log                                 the hash of the commit will change and the comment will change aswell we see
+
+
+--------------------------------------------------------------------------------
+#### CORRECTING CHANGES LOCALLY BEFORE THEIR WERE PUSHED TO REMOTE - EXAMPLE: MISSING FILE IN COMMIT AND ADDING THIS FILE TO THE LAST COMMIT ####
+--------------------------------------------------------------------------------
+forgeting to add a file to commit...ups....lets fix it....we want to add the file to the last commit 
+git add <missing file>
+git commit --amend                     comment: will bring interactive editor. in it do: " esc:wq "
+git log --stat
+
+
+--------------------------------------------------------------------------------
+#### CORRECTING CHANGES LOCALLY BEFORE THEIR WERE PUSHED TO REMOTE - EXAMPLE: WE WERE MAKING COMMITS TO THE WRONG BRANCH (like: MASTER) ####
+--------------------------------------------------------------------------------
+HOW DO WE MOVE COMMITS FROM MASTER TO FEATURE BRANCH?   GIT CHERRY PICK :)
+
+first go to the wrong branch (like: master , or developer)
+git log                              we want to grab a hash number of the commit 6-7 first numbers should be enought
+git checkout <destination feature branch>
+git log
+git cherry-pick <number hash>
+git log                    
+it will bring the commit from master / developer into new feature branch. but it still exists in the wrong branch because cherry-pick does not delete it 
+..... so ..... in order to delete the wrong commit on master, we do:
+git checkout master 
+git log 
+copy the hash number of the commit we wont to go back to...and then...
+git reset --soft <hush number>      comment: soft will set us back to the commit we specified but it will keep files in commit area
+git log
+git status                                  
+
+or
+git reset <hush number>             this is "mixed" reset which is default so we do not need to write "mixed"
+                                    changes will be is stage area 
+or
+git reset --hard <hush number>
+deletes all changes to the files, where will be no files in stage nor commit area
+git clean -df    gets rid of any untracked directories (d)  and files (f)
+
+
+--------------------------------------------------------------------------------
+#### CORRECTING GIT RESET --HARD
+--------------------------------------------------------------------------------
+
+if you used git reset --hard you still can go back to some changes deleted !!! cool no? :)
+git reflog                          comment: shows commits and infos
+git checkout <hash number which I want from reflog>
+git log
+git branch backup
+git branch 
+git checkout master
+git branch 
+git checkout backup 
+git log                             comment: we have changes which we though we have lost :)
+
+
+--------------------------------------------------------------------------------
+#### CORRECTING CHANGES LOCALLY AFTER THEY HAVE BEEN ADDED AND COMMITED AND PUSHED ####
+--------------------------------------------------------------------------------
+if need to undo some commits but other people already use it....lets use: git revert
+it will create new commits on the top of previous
+beeing on the backup branch
+git revert <hash number>
+come up with message....:wq
+
+git log 
+git diff <hash> <another hash>              to compare specific commits
+git log 
+git show <hash number of commit>
+git revert <hush number>    it will commit changes after we edit the description 
+
+
+--------------------------------------------------------------------------------
+#### RESET ADDITIONAL / SUMMARY ####
+--------------------------------------------------------------------------------
+Note that you must never use git reset to abandon commits that have already been pushed and merged into the origin. 
+git reset will move HEAD and the current branch back to wherever you specify, abandoning any commits that may be left behind.
+This is useful to undo a commit that you no longer need.
+The ref "HEAD^" is usually used together with this command. 
+"HEAD^" means "the commit right before HEAD. 
+"HEAD^^" means "two commits before HEAD", and so on.
+
+
+--------------------------------------------------------------------------------
+#### REVERT ADDITIONAL / SUMMARY. (after commiting and shearing) ####
+--------------------------------------------------------------------------------
+To undo commits that have already been pushed and shared with the team, we cannot use the git reset command. 
+Instead, we have to use git revert.
+git revert will create a new commit that will undo all of the work that was done in the commit you want to revert.
+
+
+--------------------------------------------------------------------------------
+#### REBASE ADDITIONAL / SUMMARY. git rebase <where to> ####
+--------------------------------------------------------------------------------
+rebase will take the commits on this branch and "move" them so that their new "base" is at the point you specify.
+The reason I put "move" in quotations because this process actually generates brand new commits with completely different IDs than the old commits, and leaves the old commits where they were. 
+For this reason, you never want to rebase commits that have already been shared with the team you are working with.
+Creates one branch out of two branches.
+
+
+--------------------------------------------------------------------------------
+#### TAG ADDITIONAL / SUMMARY ####
+--------------------------------------------------------------------------------
+git tag name will create a new tag named "name". Creating tags just creates a new tag pointing to the currently checked out commit.
+Tags can be deleted using the command git tag -d name 
+
+
+--------------------------------------------------------------------------------
+#### GIT STASH COMMAND - USEFULL COMMAND. STASHES CHANGES AND ALLOWS US TO DO SOME STUFF
+--------------------------------------------------------------------------------
+git checkout -b <feature branch>
+changing some files 
+git diff 
+git stash save "worked on end function"
+git diff
+git stash list
+git stash apply stash@{<number>}
+git stash list 
+git stash pop                             will grab first stash, apply and drop it
+git diff
+
+git stash save "calc functions"
+git stash list 
+edit the file 
+git diff 
+git stash save "Added square function" 
+git stash list
+git stash pop 
+
+git stash drop stash@{<number>}
+git shash list 
+git stash drop clear                     deletes all stashes
+
+diff merge apply
+
+
+--------------------------------------------------------------------------------
+#### GIT REBASE ####
+--------------------------------------------------------------------------------
+The second way (next to merge) of combining work between branches is rebasing. Rebasing essentially takes a set of commits, "copies" them, and plops them down somewhere else.
+While this sounds confusing, the advantage of rebasing is that it can be used to make a nice linear sequence of commits. The commit log / history of the repository will be a lot cleaner if only rebasing is allowed.
+git rebase <where U want to rebase into>    ex: beeing on the <newfeature> branch we can rebase into developer in this way: git rebase developer
+
+
+--------------------------------------------------------------------------------
+#### WORKING WITH REMOTE GIT ####
+--------------------------------------------------------------------------------
+git fetch ....downloads the commits that the remote has but are missing in our local repository, and...
+updates where our remote branches point (for instance, origin/master).it does not actually change any of your local files.
+git pull --rebase; we do copy of commits on remove into our local. merge them localy and then push
+git push
+
+
+--------------------------------------------------------------------------------
+#### USEFULL FEATURES/COMMANDS: ####   
+--------------------------------------------------------------------------------
+LOGS:
+git log
+git log -1                        shows only one commit 
+git log --oneline                 shows all commits and infos
+git show <hash of the commit>     shows all code in the specifiv commit
+
+
+OTHERS:
+git clean -df                     gets rid of any untracked directories (d)  and files (f)
+git remote -v                     checking the connected repos, allies/
+git remote add origin <github address>
+git remote -v
+git add -A    (shortage of --all)             stage all changes in working dir
+git reset                                     to unstage all
+git add -A <dir name>                         stage all changes in specified dir
+git reset
+git add -u    (shortage of --update)          all deleted and modified , but non of untracked files
+git add -u <dir name>
+git reset
+git add .                                    (current dir) it is differetn then default git -A but same as git add -A . 
+HEAD points to last recent commit
+
+
+BRANCHES LOCALLY:
+git branch -d <branch>  works only if branch was already merged
+git branch -D <branch>  force delete the specified branch, even if it has unmerged changes
+git branch -m <branch>  Rename the current branch to <branch>
+git branch -a           lists all branches
+
+
+BRANCHES REMOTELY:
+1) first we need to connect to the remote branch
+git remote add new-remote-repo https://bitbucket.com/user/repo.git          Add remote repo to local repo config
+git push <new-remote-repo> crazy-experiment~                                pushes the crazy-experiment branch to new-remote-repo
+
+2) How to delete remote branch 
+git push origin --delete <branch name>
+or
+git push origin :<branch name>
+
+
+NAVIGATION IN TERMINAL:
+clear                   to clear terminal window
+cat <file name>         read this txt file in terminal (look at the content)
+cd 
+cd .
+cd ..
+ls
+ls -la 
+du -sh <foo>            give me the size of the dir/file  
