@@ -60,7 +60,29 @@ git config --list                                       checking all settings
 
 9) to push changes to remote
     git push <destination>  example: git push origin developer
+    or at the beginning
+    git push -u origin master
 
+POTTENTIAL PROBLEM: fatal: remote origin already exists.
+METHOD1->
+Since origin already exist remove it.
+git remote rm origin
+git remote add origin https://github.com/USERNAME/REPOSITORY.git
+
+METHOD2->
+One can also change existing remote repository URL by ->git remote set-url
+If you're updating to use HTTPS
+git remote set-url origin https://github.com/USERNAME/REPOSITORY.git
+If you're updating to use SSH
+git remote set-url origin git@github.com:USERNAME/REPOSITORY.git
+If trying to update a remote that doesn't exist you will receive a error. So be careful of that.
+
+METHOD3->
+Use the git remote rename command to rename an existing remote. An existing remote name, for example, origin.
+git remote rename origin startpoint
+# Change remote name from 'origin' to 'startpoint'
+To verify remote's new name->
+git remote -v
 
 
 

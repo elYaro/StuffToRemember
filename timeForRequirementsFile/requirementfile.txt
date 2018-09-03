@@ -13,3 +13,18 @@ pip install -r requirements.txt     will save all your python libraries with cur
 
 TIPS BECAUSE OF WORKING WITH GIT:
 1) remember to add the virtualenv for projest into .gitignore file. Just ann name of the environment like a file name
+
+notes: 
+Checking File Sizes
+ls -l filename /* Size of the file*/
+ls -l *        /* Size of All the files in the current directory */
+ls -al *       /* Size of All the files including hidden files in the current directory */
+ls -al dir/    /* Size of All the files including hidden files in the 'dir' directory */
+
+Checking Directory sizes
+
+du -hs .                    gives a total
+du -h *                     for humen readable
+du sh *
+du -sh directory_name    /* Gives you the summarized(-s) size of the directory in human readable(-h) format*/
+du -bsh *                /* Gives you the apparent(-b) summarized(-s) size of all the files and directories in the current directory in human readable(-h) format*/
