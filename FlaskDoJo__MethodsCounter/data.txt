@@ -1,1 +1,1 @@
-{'GET': 8, 'POST': 10, 'DELETE': 6, 'PUT': 2}
+{'GET': 9, 'POST': 11, 'DELETE': 6, 'PUT': 2}

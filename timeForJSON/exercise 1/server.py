@@ -1,3 +1,4 @@
+# this exercise using Postman to sent the post request to the server. route returns some data to the Postman in the format od json
 from flask import Flask, render_template, request, json, jsonify
 
 app = Flask(__name__)
@@ -10,7 +11,7 @@ def index():
     location = data['location']
     samplelist = data['samplelist']
     return jsonify({'name':name, 'location' : location, 'samplelist' : samplelist[1]})
-
+    
 
 
 

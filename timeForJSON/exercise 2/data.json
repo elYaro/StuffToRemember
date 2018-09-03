@@ -1,0 +1,29 @@
+{
+ 	    "people": 
+         [
+         {
+ 			"name": "Jarek",
+ 			"location": "Poland",
+ 			"age": 42,
+ 			"sex": "male",
+             "happy" : true,
+             "pets" : null
+ 		},
+ 		{
+ 			"name": "Adam",
+ 			"location": "Swiss",
+ 			"age": 40,
+ 			"sex": "male",
+             "happy" : false,
+             "pets" : null
+ 		},
+ 		{
+ 			"name": "Kate",
+ 			"location": "UK",
+ 			"age": 30,
+ 			"sex": "female",
+             "happy" : false,
+             "pets" : true
+ 		}
+         ]
+}

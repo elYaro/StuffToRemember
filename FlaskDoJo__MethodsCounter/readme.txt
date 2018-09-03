@@ -1,5 +1,5 @@
 Simple application to practice basic of Flask
-In order to sent any other methods then GET and POST please use curl or simmilar app.
+In order to sent any other methods then GET and POST please use curl or simmilar app (like Postman).
 Curl is installed as default on Macs so I use Curl here.
 For Curl please write in terminal:
 curl -X PUT  http://127.0.0.1:8000/request-counter
